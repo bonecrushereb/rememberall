@@ -31,20 +31,20 @@ function remove() {
 }
 
 function show() {
-  var todos = get_todos();
+    var todos = get_todos();
 
-  var html = '<ul>';
-  for (var i = 0; i < todos.length; i++) {
-    html += '<li>' + todos[i] + '<button class="remove" id="' + i + '">x</button></li>';
-  };
-  html += '</ul>';
+    var html = '<ul>';
+    for(var i=0; i<todos.length; i++) {
+        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button></li>';
+    };
+    html += '</ul>';
 
-  document.getElementById('todos').innerHtml = html;
+    document.getElementById('todos').innerHTML = html;
 
-  var buttons = document.getElementsByClassName('remove');
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', remove);
-  };
+    var buttons = document.getElementsByClassName('remove');
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', remove);
+    };
 }
 
 document.getElementById('add').addEventListener('click', add);
