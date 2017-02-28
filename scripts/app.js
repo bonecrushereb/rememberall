@@ -1,57 +1,40 @@
-var today = new Date;
+function ConvertFormToJSON(form) {
+  var array = $(form).serializeArray();
+  var json = {};
 
-if (today.getHours() == 17) {
-  localStorage.clear();
+  $.each(array, function() {
+    json[this.name] = this.value || '';
+  });
+
+  return json;
 }
 
-function get_todos() {
-  var todos = new Array;
-  var todos_str = localStorage.getItem('todo');
-  if (todos_str != null) {
-    todos = JSON.parse(todos_str);
-  }
-  return todos;
-}
+jQuery(document).on('ready', function() {
+  jQuery('form#add-new-task').bind('submit', function(event){
+    event.preventDefault();
 
-function add() {
-  var task = document.getElementById('task').value;
+    var form = this;
+    var json = ConvertFormToJSON(form);
+    var tbody = jQuery('#to-do-list > tbody');
 
-  var todos = get_todos();
-  todos.push(task);
-  localStorage.setItem('todo', JSON.stringify(todos));
+    $.ajax({
+      type: "POST",
+      url: "submit.php",
+      data: json,
+      dataType: "json"
+    }).success(function(state) {
+      if(state.success === true) {
+        tbody.append('<tr><th scope="row" style="background-color:' + state['color'] +
+          '"><input type="checkbox" /></th><td>' + state['date'] +
+          '</td><td>' + state['priority'] + '</td><td>' + state['name'] +
+          '</td><td>' + state['desc'] + '</td><td>' + state['email'] + '</td></tr>');
+      } else {
+        alert(state.error.join());
+      }
+    }).fail(function(state) {
+      alert("Failed to add to-do");
+    });
 
-  show();
-
-  return false;
-}
-
-function remove() {
-  var id = this.getAttribute('id');
-  var todos = get_todos();
-  todos.splice(id, 1);
-  localStorage.setItem('todo', JSON.stringify(todos));
-
-  show();
-
-  return false;
-}
-
-function show() {
-    var todos = get_todos();
-
-    var html = '<ul>';
-    for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button></li>';
-    };
-    html += '</ul>';
-
-    document.getElementById('todos').innerHTML = html;
-
-    var buttons = document.getElementsByClassName('remove');
-    for (var i=0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', remove);
-    };
-}
-
-document.getElementById('add').addEventListener('click', add);
-show();
+    return true;
+  });
+});
