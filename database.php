@@ -2,12 +2,12 @@
 global $connection;
 
 if ( isset( $connection ) )
-  return;
+	return;
 mysqli_report(MYSQLI_REPORT_STRICT);
 
-$connection = new mysqli("localhost", "root", "", "todo");
+$connection = new mysqli("localhost", "todo", "root", "root");
 
-if (mysqli_connect_errno()) {
-  die(sprintf("Connect failed: %s\n", mysqli_connect_error()));
+if (mysqli_connect_errno()) {		
+	die(sprintf("Connect failed: %s\n", mysqli_connect_error()));
 }
- ?>
+?>
