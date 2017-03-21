@@ -5,53 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Todo-List</title>
     <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
-
-    <form id="add-new-task">
-        <label for="new-task-name">Name:</label>
-        <input id="new-task-name" name="new-task-name" type="text" required>
-        <label for="new-task-date">Date:</label>
-        <input id="new-task-date" name="new-task-date" type="datetime" required>
-        <br/>
-        <label for="new-task-priority">Priority:</label>
-        <input id="new-task-priority" name="new-task-priority" type="number" required min="1" max="5" step="1" value="2">
-        <label for="new-task-color">Color:</label>
-        <input id="new-task-color" name="new-task-color" type="color">
-        <br/>
-        <label for="new-task-desc">Description:</label>
-        <input id="new-task-desc" name="new-task-desc" type="text">
-        <br/>
-        <label for="new-task-email">Invite:</label>
-        <input id="new-task-email" name="new-task-email" type="email" multiple>
-        <br />
-        <input type="submit" value="Add new">
+    <form>
+      <p>Task <input id="task" placeholder="Place your task here"></p>
+      <p>Priority <input id="priority" placeholder="Place task priority (1-10)"></p>
+      <p>Date <input type="text" id="datepicker"></p>
+      <button id="add">Add</button>
     </form>
 
-    <table id="to-do-list">
-      <caption>What to do next?</caption>
-      <colgroup>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-      </colgroup>
-      <thead>
+    <article>
+      <table id="todoTable">
         <tr>
-          <th scope="col"></th>
-          <th scope="col">Date</th>
-          <th scope="col">Priority</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Invitees</th>
+          <th>Name</th>
+          <th>Priority</th>
+          <th>Date due</th>
+          <th></th>
         </tr>
-      </thead>
-    </table>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+      </table>
+    </article>
     <script src="scripts/app.js"></script>
   </body>
 </html>
