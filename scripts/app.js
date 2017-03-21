@@ -20,9 +20,20 @@ document.getElementById('add').addEventListener("click", function add() {
     "priority": prior,
     "date": date
   };
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  allTodos.push(tasks);
-  localStorage.setItem('allTodos', JSON.stringify(allTodos));
+
+  if (task == "" && prior == "" && date == "") {
+    alert("please fill in required fields");
+  } else if (task == ""){
+    alert("please fill in the task name");
+  } else if (prior == "") {
+    alert("what is the priority of the task?");
+  } else if (date == "") {
+    alert("what date is the task due?");
+  } else {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    allTodos.push(tasks);
+    localStorage.setItem('allTodos', JSON.stringify(allTodos));
+  }
 
   show();
 
