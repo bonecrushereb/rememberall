@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-color: #f9f7b6;
+  font-family: 'Open Sans', sans-serif;
+}
+
+form {
+  margin-top: 20px;
+}
+
+p {
+  text-align: justify;
+  margin-left: 450px;
+  padding: 5px;
+}
+
+#task {
+  width: 300px;
+}
+
+table {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+th {
+  padding-left: 40px;
+  border-bottom: 1px solid black;
+}
+
+td {
+  padding-top: 10px;
+  padding-left: 40px;
+}
