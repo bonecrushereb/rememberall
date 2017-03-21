@@ -1,3 +1,4 @@
+var allTodos = JSON.parse(localStorage.getItem("allTodos"));
 
 $(function() {
   $("#datepicker").datepicker({
@@ -6,31 +7,57 @@ $(function() {
   });
 });
 
-function get_todos() {
-  var todos_str = JSON.localStorage.getItem('allTodos');
-  if (todos_str != null) {
-    todos = JSON.parse(todos_str);
-  }
-  return todos;
-}
+document.getElementById('add').addEventListener("click", function add() {
+  event.preventDefault();
 
-function add() {
-  console.log("hello from add");
-  var allTodos = [];
+  if (allTodos == null) allTodos = [];
   var task = document.getElementById('task').value;
   var prior = document.getElementById('priority').value;
   var date = document.getElementById('datepicker').value;
 
-  var task = {
+  var tasks = {
     "task": task,
-    "priority": priority,
+    "priority": prior,
     "date": date
   };
-  localStorage.setItem('todo', JSON.stringify(todo));
-  allTodos.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  allTodos.push(tasks);
   localStorage.setItem('allTodos', JSON.stringify(allTodos));
 
-  return false;
+  show();
+
+  return allTodos;
+});
+
+function show(allTodos) {
+  JSON.parse(localStorage.getItem('allTodos'));
+  var table = document.getElementById("todoTable");
+  var allTodos = JSON.parse(localStorage.getItem("allTodos"));
+  for (var i = 0; i < allTodos.length; i++) {
+    var row = table.insertRow();
+    row.id=allTodos[i].task;
+    row.class="task";
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+
+    cell1.innerHTML = allTodos[i].task;
+    cell2.innerHTML = allTodos[i].priority;
+    cell3.innerHTML = allTodos[i].date;
+    cell4.innerHTML = '<button class="remove" id="' + i +'">DONE</button>';
+  };
+
+  var buttons = document.getElementsByClassName('remove');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function remove() {
+      var id = this.getAttribute('id');
+      allTodos.splice(id, 1);
+      localStorage.setItem('allTodos', JSON.stringify(allTodos));
+      $(document.getElementById(row.id)).remove();
+    });
+  };
 }
 
-document.getElementById('add').addEventListener("click", add);
+
+show(allTodos);
