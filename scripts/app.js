@@ -10,6 +10,10 @@ $(function() {
 document.getElementById('add').addEventListener("click", function add() {
   event.preventDefault();
 
+  if (localStorage.tasks !=null) {
+    localStorage.removeItem('tasks');
+  }
+
   if (allTodos == null) allTodos = [];
   var task = document.getElementById('task').value;
   var prior = document.getElementById('priority').value;
@@ -27,8 +31,6 @@ document.getElementById('add').addEventListener("click", function add() {
     alert("please fill in the task name");
   } else if (prior == "") {
     alert("what is the priority of the task?");
-  } else if (date == "") {
-    alert("what date is the task due?");
   } else {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     allTodos.push(tasks);
@@ -41,13 +43,14 @@ document.getElementById('add').addEventListener("click", function add() {
 });
 
 function show(allTodos) {
+  localStorage.removeItem('tasks');
   JSON.parse(localStorage.getItem('allTodos'));
   var table = document.getElementById("todoTable");
   var allTodos = JSON.parse(localStorage.getItem("allTodos"));
   for (var i = 0; i < allTodos.length; i++) {
     var row = table.insertRow();
     row.id=allTodos[i].task;
-    row.class="task";
+    row.class='task';
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
@@ -71,4 +74,4 @@ function show(allTodos) {
 }
 
 
-show(allTodos);
+// show(allTodos);
