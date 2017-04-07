@@ -67,3 +67,5 @@ function show(allTodos) {
     });
   };
 }
+
+show();
