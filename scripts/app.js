@@ -39,23 +39,21 @@ document.getElementById('add').addEventListener("click", function add() {
 
   show();
 
-  return allTodos;
+  return false;
 });
 
 function show(allTodos) {
   localStorage.removeItem('tasks');
-  JSON.parse(localStorage.getItem('allTodos'));
-  var table = document.getElementById("todoTable");
   var allTodos = JSON.parse(localStorage.getItem("allTodos"));
-  var table = document.getElementById('todoTable');
-  var tr = document.createElement('tr');
   for (var i = 0; i < allTodos.length; i++) {
+    var table = document.getElementById('todoTable');
+    var tr = document.createElement('tr');
     tr.id = allTodos[i].task;
     var el = ('<td>' + allTodos[i].task + '</td>' + '<td>' + allTodos[i].priority + '</td>' +
               '<td>' + allTodos[i].date + '</td>' + '<td>' + '<button class="remove" id="' + i +'">DONE</button>' + '</td>');
    tr.innerHTML = el;
-   table.appendChild(tr);
   };
+  table.appendChild(tr);
 
   var buttons = document.getElementsByClassName('remove');
   for (var i = 0; i < buttons.length; i++) {

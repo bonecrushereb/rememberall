@@ -18,13 +18,24 @@ p {
   padding: 5px;
 }
 
+#ui-datepicker-div {
+  position: absolute;
+  margin-top: 5px;
+  font-size: 8px;
+}
+
+
 #task {
   width: 300px;
 }
 
+#add {
+  margin-left: 20px;
+}
+
 table {
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 150px;
 }
 
 th {
