@@ -10,6 +10,10 @@ $(function() {
 document.getElementById('add').addEventListener("click", function add() {
   event.preventDefault();
 
+  if (localStorage.tasks !=null) {
+    localStorage.removeItem('tasks');
+  }
+
   if (allTodos == null) allTodos = [];
   var task = document.getElementById('task').value;
   var prior = document.getElementById('priority').value;
@@ -27,8 +31,6 @@ document.getElementById('add').addEventListener("click", function add() {
     alert("please fill in the task name");
   } else if (prior == "") {
     alert("what is the priority of the task?");
-  } else if (date == "") {
-    alert("what date is the task due?");
   } else {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     allTodos.push(tasks);
@@ -37,27 +39,21 @@ document.getElementById('add').addEventListener("click", function add() {
 
   show();
 
-  return allTodos;
+  return false;
 });
 
 function show(allTodos) {
-  JSON.parse(localStorage.getItem('allTodos'));
-  var table = document.getElementById("todoTable");
+  localStorage.removeItem('tasks');
   var allTodos = JSON.parse(localStorage.getItem("allTodos"));
   for (var i = 0; i < allTodos.length; i++) {
-    var row = table.insertRow();
-    row.id=allTodos[i].task;
-    row.class="task";
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-
-    cell1.innerHTML = allTodos[i].task;
-    cell2.innerHTML = allTodos[i].priority;
-    cell3.innerHTML = allTodos[i].date;
-    cell4.innerHTML = '<button class="remove" id="' + i +'">DONE</button>';
+    var table = document.getElementById('todoTable');
+    var tr = document.createElement('tr');
+    tr.id = allTodos[i].task;
+    var el = ('<td>' + allTodos[i].task + '</td>' + '<td>' + allTodos[i].priority + '</td>' +
+              '<td>' + allTodos[i].date + '</td>' + '<td>' + '<button class="remove" id="' + i +'">DONE</button>' + '</td>');
+   tr.innerHTML = el;
   };
+  table.appendChild(tr);
 
   var buttons = document.getElementsByClassName('remove');
   for (var i = 0; i < buttons.length; i++) {
@@ -65,10 +61,9 @@ function show(allTodos) {
       var id = this.getAttribute('id');
       allTodos.splice(id, 1);
       localStorage.setItem('allTodos', JSON.stringify(allTodos));
-      $(document.getElementById(row.id)).remove();
+      $(document.getElementById(tr.id)).remove();
     });
   };
 }
 
-
-show(allTodos);
+show();
