@@ -32,18 +32,3 @@ p {
 #add {
   margin-left: 20px;
 }
-
-table {
-  margin: 0 auto;
-  margin-top: 150px;
-}
-
-th {
-  padding-left: 40px;
-  border-bottom: 1px solid black;
-}
-
-td {
-  padding-top: 10px;
-  padding-left: 40px;
-}
