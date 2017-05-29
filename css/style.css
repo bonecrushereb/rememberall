@@ -18,6 +18,14 @@ p {
   padding: 5px;
 }
 
+article {
+  margin-top: 20px;
+}
+ul {
+  margin-right: 300px;
+  list-style: none;
+}
+
 #ui-datepicker-div {
   position: absolute;
   margin-top: 5px;
