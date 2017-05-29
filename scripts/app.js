@@ -54,15 +54,14 @@ function show() {
 
   var buttons = document.getElementsByClassName('remove');
   for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function remove() {
+    buttons[i].addEventListener('click', function remove() {
+      console.log("button clicked");
       var id = this.getAttribute('id');
       allTodos.splice(id, 1);
       localStorage.setItem('allTodos', JSON.stringify(allTodos));
-
       show();
-
     });
-    return false;
   };
+  return false;
 }
 show();
