@@ -1,4 +1,3 @@
-var allTodos = JSON.parse(localStorage.getItem("allTodos"));
 
 $(function() {
   $("#datepicker").datepicker({
@@ -9,7 +8,7 @@ $(function() {
 
 document.getElementById('add').addEventListener("click", function add() {
   event.preventDefault();
-
+  var allTodos = JSON.parse(localStorage.getItem("allTodos"));
   if (localStorage.tasks !=null) {
     localStorage.removeItem('tasks');
   }
@@ -42,28 +41,27 @@ document.getElementById('add').addEventListener("click", function add() {
   return false;
 });
 
-function show(allTodos) {
+function show() {
   localStorage.removeItem('tasks');
   var allTodos = JSON.parse(localStorage.getItem("allTodos"));
-  for (var i = 0; i < allTodos.length; i++) {
-    var table = document.getElementById('todoTable');
-    var tr = document.createElement('tr');
-    tr.id = allTodos[i].task;
-    var el = ('<td>' + allTodos[i].task + '</td>' + '<td>' + allTodos[i].priority + '</td>' +
-              '<td>' + allTodos[i].date + '</td>' + '<td>' + '<button class="remove" id="' + i +'">DONE</button>' + '</td>');
-   tr.innerHTML = el;
+  var html = '<ul>';
+  for(var i=0; i<allTodos.length; i++) {
+      html += '<li>' + allTodos[i].priority + '&nbsp;&nbsp;&nbsp;' + allTodos[i].task + '&nbsp;&nbsp;&nbsp;' + allTodos[i].date + '&nbsp; <button class="remove" id="' + i  + '">Done</button></li>';
   };
-  table.appendChild(tr);
+  html += '</ul>';
+
+  document.getElementById('todos').innerHTML = html;
 
   var buttons = document.getElementsByClassName('remove');
   for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function remove() {
+    buttons[i].addEventListener('click', function remove() {
+      console.log("button clicked");
       var id = this.getAttribute('id');
       allTodos.splice(id, 1);
       localStorage.setItem('allTodos', JSON.stringify(allTodos));
-      $(document.getElementById(tr.id)).remove();
+      show();
     });
   };
+  return false;
 }
-
 show();
