@@ -46,7 +46,7 @@ function show() {
   var allTodos = JSON.parse(localStorage.getItem("allTodos"));
   var html = '<ul>';
   for(var i=0; i<allTodos.length; i++) {
-      html += '<li>' + allTodos[i].priority + '&nbsp;&nbsp;&nbsp;' + allTodos[i].task + '&nbsp;&nbsp;&nbsp;' + allTodos[i].date + '&nbsp; <button class="remove" id="' + i  + '">Done</button></li>';
+      html += '<li> priority: ' + allTodos[i].priority + '&nbsp;&nbsp;&nbsp; task: ' + allTodos[i].task + '&nbsp;&nbsp;&nbsp; Date Due: ' + allTodos[i].date + '&nbsp; <button class="remove" id="' + i  + '">Done</button></li>';
   };
   html += '</ul>';
 
